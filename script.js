@@ -1,0 +1,32 @@
+'use strict';
+
+const questionDiv = document.querySelectorAll('.quest');
+const questionParagraph = document.querySelectorAll('.quest-title');
+const answerDiv = document.querySelectorAll('.answer');
+const arrowImg = document.querySelectorAll('.arrow');
+
+const makeDefault = function (x) {
+  answerDiv[x].classList.add('hidden');
+  questionParagraph[x].style.color = 'hsl(237, 12%, 33%, 0.8)';
+  arrowImg[x].classList.remove('rotate');
+};
+
+for (let i = 0; i < questionDiv.length; i++) {
+  questionDiv[i].addEventListener('click', function () {
+    for (let j = i + 1; j < questionDiv.length; j++) {
+      if (!answerDiv[j].classList.contains('hidden')) {
+        makeDefault(j);
+      }
+    }
+    for (let k = i; k >= 0; k--) {
+      if (!answerDiv[k].classList.contains('hidden')) {
+        makeDefault(k);
+      }
+    }
+    questionParagraph[i].style.color = 'hsl(238, 29%, 16%)';
+    answerDiv[i].classList.remove('hidden');
+    arrowImg[i].classList.add('rotate');
+  });
+}
+
+console.log(makeDefault(i))
